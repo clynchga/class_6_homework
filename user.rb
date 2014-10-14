@@ -1,12 +1,13 @@
 class User
 
-	attr_accessor :username, :password, :tweets, :following
+	attr_accessor :username, :password, :tweets, :following, :likes
 
 	def initialize(username, password)
 		@username = username
 		@password = password
 		@tweets = []
 		@following = []
+		@likes = []
 		$global_users.push(self)
 	end
 
@@ -81,6 +82,22 @@ class User
 		else 
 			puts "Please log in to see who you've followed"
 		end
+	end
+
+	def like(tweet) # takes a tweet object as an input
+		if $session == self
+			self.likes.push(tweet)
+		else 
+			puts "Please log in to like tweets"
+		end 
+	end
+
+	def read_likes
+		if $session == self
+			self.likes.each{ |t| puts "title: #{t.title}\nauthor: #{t.author}\ntweet: #{t.content}\n\n"}
+		else 
+			puts "Please log in to see the tweets you've liked"
+		end 
 	end
 
 end 
