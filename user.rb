@@ -11,16 +11,18 @@ class User
 		$global_users.push(self)
 	end
 
-	def sign_in
-		puts "Enter your username "
-		un = gets.chomp
-		puts "Enter your password "
-		pw = gets.chomp
-		if un == self.username && pw == self.password
-			$session = self
-			puts "Welcome back, #{self.username}"
-		else 
-			puts "Sorry, wrong information. Please try again"
+	def self.sign_in(un, pw)
+		match = false
+		$global_users.each do |user|
+			if user.username == un && user.password == pw
+				$session = user
+				match = true
+				puts "Welcome back, #{user.username}"
+				break
+			end
+		end
+		if match == false 
+			puts "Incorrect sign in credentials"
 		end
 	end
 
