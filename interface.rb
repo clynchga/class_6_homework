@@ -31,6 +31,7 @@ while command == true
 	puts "12: list all users\n"
 
 	input = gets.chomp
+	puts "<<You chose #{input}>>"
 
 	case input
 	when "1"
